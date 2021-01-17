@@ -11,7 +11,7 @@ Tmin_arr <- nc_open("E:/CHN_Tmin_DAY_GRID_0.5_196101-201908.nc") %>%
 nc_close(ncfile)
 
 # At least k consecutive days > T1
-# T1 = prob percentile
+# T1 = prob percentile of data
 # input a vector, return a vector, including True or False
 contpass_prob <- function(data, prob, k){
   THR <- quantile(data, prob, na.rm = TRUE)
