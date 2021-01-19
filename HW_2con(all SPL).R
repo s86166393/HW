@@ -14,21 +14,16 @@ nc_close(ncfile)
 # if percentile = True, THR = prob percentile of the data
 # input a vector, return a vector, including True or False
 contpass_allSPL <- function(data, THR, percentile = False, k){
-  if (percentile == True) {
-    THR <- quantile(data, THR, na.rm = TRUE)
-  }
+  if (percentile == True) THR <- quantile(data, THR, na.rm = TRUE)
   data[is.na(data)] <- FALSE
-  if (all(data == 0)){
-    return (data)
-  } else {
-    satisfy <- which(data > THR) %>%
-      split(., cumsum(c(TRUE, diff(.) != 1L))) %>%
-      keep(function(x) length(x) >= k) %>%
-      unlist()
-    data[data != 0] <- FALSE
-    data[satisfy] <- TRUE
-    return (data)
-  }
+  if (all(data == 0)) return (data)
+  satisfy <- which(data > THR) %>%
+    split(., cumsum(c(TRUE, diff(.) != 1L))) %>%
+    keep(function(x) length(x) >= k) %>%
+    unlist()
+  data[data != 0] <- FALSE
+  data[satisfy] <- TRUE
+  data
 }
 
 
