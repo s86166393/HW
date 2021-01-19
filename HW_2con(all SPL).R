@@ -32,17 +32,17 @@ contpass_allSPL <- function(data, THR, percentile = False, k){
 }
 
 
-HW.1 <- apply(Tmean_arr, c(1, 2), function(x) contpass_prob(x, 0.9, 2)) %>%
+HW1 <- apply(Tmean_arr, c(1, 2), function(x) contpass_prob(x, 0.9, 2)) %>%
   aperm(c(2,3,1))
-HW.2 <- apply(Tmean_arr, c(1, 2), function(x) contpass_prob(x, 0.95, 2)) %>%
+HW2 <- apply(Tmean_arr, c(1, 2), function(x) contpass_prob(x, 0.95, 2)) %>%
   aperm(c(2,3,1))
-HW.3 <- apply(Tmax_arr, c(1, 2), function(x) contpass_prob(x, 0.95, 2)) %>%
+HW3 <- apply(Tmax_arr, c(1, 2), function(x) contpass_prob(x, 0.95, 2)) %>%
   aperm(c(2,3,1))
-HW.4 <- apply(Tmin_arr, c(1, 2), function(x) contpass_prob(x, 0.95, 2)) %>%
+HW4 <- apply(Tmin_arr, c(1, 2), function(x) contpass_prob(x, 0.95, 2)) %>%
   aperm(c(2,3,1))
-HW.5 <- apply(Tmean_arr, c(1, 2), function(x) contpass_prob(x, 0.98, 2)) %>%
+HW5 <- apply(Tmean_arr, c(1, 2), function(x) contpass_prob(x, 0.98, 2)) %>%
   aperm(c(2,3,1))
-HW.6 <- apply(Tmean_arr, c(1, 2), function(x) contpass_prob(x, 0.99, 2)) %>%
+HW6 <- apply(Tmean_arr, c(1, 2), function(x) contpass_prob(x, 0.99, 2)) %>%
   aperm(c(2,3,1))
-HW.7 <- apply(Tmax_arr, c(1, 2), function(x) contpass_THR(x, 35, 3)) %>%
+HW7 <- apply(Tmax_arr, c(1, 2), function(x) contpass_THR(x, 35, 3)) %>%
   aperm(c(2,3,1))
