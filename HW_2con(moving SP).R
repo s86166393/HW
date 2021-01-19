@@ -14,7 +14,7 @@ time <- ncvar_get(ncfile, "time")
 date <- time + ymd(ncfile[["dim"]][["time"]][["units"]])
 nc_close(ncfile)
 
-contpass_SPL <- function(data, prob, k = 1) {
+contpass_movingSPL <- function(data, prob, k = 1) {
   if (all(is.na(data)) == TRUE) {
     data[is.na(data)] <- FALSE
     return(data)
