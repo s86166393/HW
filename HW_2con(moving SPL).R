@@ -18,27 +18,26 @@ contpass_movingSPL <- function(data, prob, k = 1) {
   if (all(is.na(data)) == TRUE) {
     data[is.na(data)] <- FALSE
     return(data)
+  }
+  window <- slide(data, ~.x, .before = 7, .after = 7, .complete = TRUE) %>%
+    set_names(format(date, '%m-%d'))
+  merge <- map(unique(names(window)), ~ flatten_dbl(window[names(window) == .x])) %>%
+    set_names(unique(names(window))) %>%
+    map(function(x) quantile(x, prob, na.rm = TRUE))
+  data_named <- set_names(data, format(date, '%m-%d'))
+  
+  if (k != 1) {
+    satisfy <- which(data_named > merge[names(data_named)]) %>%
+      split(., cumsum(c(TRUE, diff(.) != 1L))) %>%
+      keep(function(x) length(x) >= k) %>%
+      unlist()
+    data_named[data_named != 0] <- FALSE
+    data_named[satisfy] <- TRUE
+    data_named
   } else {
-    window <- slide(data, ~.x, .before = 7, .after = 7, .complete = TRUE) %>%
-      set_names(format(date, '%m-%d'))
-    merge <- map(unique(names(window)), ~ flatten_dbl(window[names(window) == .x])) %>%
-      set_names(unique(names(window))) %>%
-      map(function(x) quantile(x, prob, na.rm = TRUE))
-    data_named <- set_names(data, format(date, '%m-%d'))
-
-    if (k != 1) {
-      satisfy <- which(data_named > merge[names(data_named)]) %>%
-        split(., cumsum(c(TRUE, diff(.) != 1L))) %>%
-        keep(function(x) length(x) >= k) %>%
-        unlist()
-      data_named[data_named != 0] <- FALSE
-      data_named[satisfy] <- TRUE
-      data_named
-    } else {
-      whether <- data_named > merge[names(data_named)]
-      whether[is.na(whether)] <- FALSE
-      whether
-    }
+    whether <- data_named > merge[names(data_named)]
+    whether[is.na(whether)] <- FALSE
+    whether
   }
 }
 
