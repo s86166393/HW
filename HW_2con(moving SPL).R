@@ -41,8 +41,8 @@ contpass_movingSPL <- function(data, prob, k = 1) {
   }
 }
 
-HW8 <- future_apply(Tmax_arr, c(1, 2), function(x) ifhw(x, 0.95, 2)) %>%
+HW8 <- future_apply(Tmax_arr, c(1, 2), function(x) contpass_movingSPL(x, 0.95, 2)) %>%
   aperm(c(2,3,1))
-HW9 <- future_apply(Tmin_arr, c(1, 2), function(x) ifhw(x, 0.95, 2)) %>%
+HW9 <- future_apply(Tmin_arr, c(1, 2), function(x) contpass_movingSPL(x, 0.95, 2)) %>%
   aperm(c(2,3,1))
 
