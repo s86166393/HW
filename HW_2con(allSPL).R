@@ -13,7 +13,7 @@ nc_close(ncfile)
 # At least k consecutive days > THR
 # if percentile = True, THR = prob percentile of the data
 # input a vector, return a vector, including True or False
-contpass_allSP <- function(data, THR, percentile = False, k){
+contpass_allSPL <- function(data, THR, percentile = False, k){
   if (percentile == True) {
     THR <- quantile(data, prob, na.rm = TRUE)
   }
