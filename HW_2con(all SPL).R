@@ -15,7 +15,7 @@ nc_close(ncfile)
 # input a vector, return a vector, including True or False
 contpass_allSPL <- function(data, THR, percentile = False, k){
   if (percentile == True) {
-    THR <- quantile(data, prob, na.rm = TRUE)
+    THR <- quantile(data, THR, na.rm = TRUE)
   }
   data[is.na(data)] <- FALSE
   if (all(data == 0)){
